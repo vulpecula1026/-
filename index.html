@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belgium Journey Handbook</title>
+  <style>
+    :root {
+      --page-bg: #f8f4ea;
+      --paper: #fffdf8;
+      --paper-soft: #f8f0dd;
+      --text: #26322b;
+      --muted: #66746b;
+      --subtle: #8a927f;
+      --line: #bcae8c;
+      --line-soft: #e4d6ba;
+      --green: #748360;
+      --green-deep: #324a2c;
+      --green-soft: #dce6cc;
+      --orange: #b75527;
+      --orange-soft: #f4d5bd;
+      --blue: #516b92;
+      --blue-soft: #dce8f4;
+      --red: #a65a5a;
+      --red-soft: #f7dada;
+      --shadow: rgba(50, 50, 30, 0.12);
+      --font: "Inter", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body.night {
+      --page-bg: #1e2a24;
+      --paper: #253626;
+      --paper-soft: #182719;
+      --text: #eef3e7;
+      --muted: #b9bca9;
+      --subtle: #9ba386;
+      --line: #7b8771;
+      --line-soft: #33483b;
+      --green: #a9bb93;
+      --green-deep: #ccd6bf;
+      --green-soft: #23361e;
+      --orange: #d6a475;
+      --orange-soft: #4c332a;
+      --blue: #aebdd8;
+      --blue-soft: #30445c;
+      --red: #dca288;
+      --red-soft: #51302c;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 10%, var(--paper-soft), transparent 12%),
+        radial-gradient(circle at 15% 80%, var(--orange-soft), transparent 12%),
+        var(--page-bg);
+      font-family: var(--font);
+      min-height: 100vh;
+      transition: background 360ms ease, color 360ms ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -80px;
+      background-image: radial-gradient(var(--line-soft), transparent 1px);
+      background-size: 24px 24px;
+      background-repeat: repeat;
+      opacity: 0.05;
+      pointer-events: none;
+      transform: rotate(7deg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .app {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 90px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 18px;
+      border-bottom: 1px dashed var(--line);
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--green-deep);
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+      box-shadow: 0 2px 5px var(--shadow);
+      font-size: 20px;
+    }
+
+    .topbar-meta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .topbar-meta span {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--paper);
+      border: 1px solid var(--line-soft);
+    }
+
+    .focus-card {
+      display: grid;
+      grid-template-columns: minmax(420px, 1.6fr) minmax(260px, 1fr);
+      gap: 20px;
+      align-items: stretch;
+      margin: 26px 0 16px;
+      padding: 22px;
+      border-radius: 12px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 40px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .focus-card::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      border: 1px dashed var(--line);
+      background: transparent;
+    }
+
+    .focus-kicker {
+      color: var(--orange);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .focus-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 46px);
+      margin: 12px 0 8px;
+      color: var(--green-deep);
+      line-height: 1.2;
+    }
+
+    .focus-event {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .event-type {
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-weight: 600;
+    }
+
+    .event-change {
+      border-left: 1px solid var(--line);
+      padding-left: 10px;
+    }
+
+    .countdown-panel {
+      background: var(--paper-soft);
+      border-radius: 14px;
+      border: 1px solid var(--line-soft);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      min-width: 260px;
+    }
+
+    .countdown-title {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(44px, 1fr));
+      gap: 10px;
+      align-items: center;
+    }
+
+    .time-unit {
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      background: var(--paper);
+      text-align: center;
+      padding: 10px 4px;
+      min-width: 54px;
+    }
+
+    .time-value {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 2vw, 40px);
+      color: var(--green-deep);
+      line-height: 1;
+    }
+
+    .time-label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    .countdown-date {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      border-top: 1px dashed var(--line);
+      padding-top: 12px;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 22px;
+      background: var(--paper);
+      border-radius: 12px;
+      border: 1px solid var(--line-soft);
+      box-shadow: 0 8px 30px var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(26px, 3vw, 34px);
+      color: var(--green-deep);
+      margin-bottom: 12px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 44px;
+      height: 2px;
+      background: var(--orange);
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-top: -6px;
+      margin-bottom: 12px;
+    }
+
+    .map-wrap {
+      min-height: 260px;
+      padding: 14px;
+      background: var(--paper-soft);
+      border-radius: 10px;
+      border: 1px dashed var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-wrap svg {
+      width: min(100%, 760px);
+      height: auto;
+      display: block;
+    }
+
+    .map-wrap path.route-one { stroke: var(--orange); stroke-width: 3; fill: none; stroke-linecap: round; stroke-dasharray: 3 4; }
+    .map-wrap path.route-two { stroke: var(--blue); stroke-width: 3; fill: none; stroke-linecap: round; stroke-dasharray: 4 3; }
+    .map-wrap path.route-three { stroke: var(--green); stroke-width: 3; fill: none; stroke-linecap: round; stroke-dasharray: 1 4; }
+
+    .map-label {
+      font-size: 11px;
+      fill: var(--muted);
+      font-family: var(--font);
+    }
+
+    .map-city {
+      fill: var(--green-deep);
+      font-weight: 700;
+    }
+
+    .pin-label {
+      font-size: 11px;
+      fill: var(--orange);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .bookings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .booking-card {
+      background: var(--paper-soft);
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 156px;
+      position: relative;
+      transition: transform 300ms ease;
+    }
+
+    .booking-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .booking-card .booking-kind {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .booking-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+      border: 1px solid var(--line-soft);
+      color: var(--green-deep);
+      font-size: 16px;
+    }
+
+    .booking-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      color: var(--green-deep);
+    }
+
+    .booking-details {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .booking-details strong {
+      color: var(--text);
+    }
+
+    .booking-phone {
+      color: var(--blue);
+      font-size: 12px;
+    }
+
+    .booking-list {
+      display: block;
+      width: auto;
+      border-top: 1px dashed var(--line);
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .day-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .day-card {
+      background: var(--paper-soft);
+      border-radius: 12px;
+      border: 1px solid var(--line-soft);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 12px;
+    }
+
+    .day-heading-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .day-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--green-deep);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    .day-date {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .day-title {
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(23px, 2.4vw, 30px);
+      margin-top: 6px;
+    }
+
+    .route-toggle {
+      background: var(--paper);
+      color: var(--green-deep);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-family: var(--font);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 250ms ease;
+    }
+
+    .route-toggle:hover {
+      background: var(--green-deep);
+      color: var(--paper);
+    }
+
+    .route-map-day {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px dashed var(--line);
+      padding-top: 12px;
+      background: var(--paper);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .route-map-day.open {
+      display: block;
+    }
+
+    .route-map-day svg {
+      display: block;
+      width: 100%;
+      min-height: 150px;
+      border-radius: 8px;
+      border: 1px dashed var(--line-soft);
+    }
+
+    .daily-entries {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .day-entry {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      align-items: start;
+      gap: 14px;
+      border-bottom: 1px dashed var(--line-soft);
+      padding-bottom: 10px;
+    }
+
+    .day-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .entry-time {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      margin-top: 3px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .entry-content {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .entry-content .place {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      color: var(--green-deep);
+      font-size: 16px;
+    }
+
+    .entry-content .place a {
+      color: var(--green-deep);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entry-content .place a:hover {
+      color: var(--orange);
+    }
+
+    .entry-note {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--orange-soft);
+      border-radius: 999px;
+      padding: 4px 8px;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 5px;
+    }
+
+    .entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      padding: 4px 8px;
+      color: var(--muted);
+      font-size: 11px;
+      background: var(--paper);
+    }
+
+    .checklist {
+      background: var(--paper-soft);
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 12px 0;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px dashed var(--line-soft);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .check-row:last-child {
+      border-bottom: none;
+    }
+
+    .check-row .check-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 1px solid var(--orange);
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .tip-card {
+      background: var(--paper-soft);
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      padding: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .tip-card strong {
+      color: var(--green-deep);
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 860px) {
+      .focus-card,
+      .bookings-grid,
+      .tip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-wrap: wrap;
+      }
+
+      .day-entry {
+        grid-template-columns: 1fr;
+      }
+
+      .entry-time {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">✦</span>
+        <span>Belgium Guide</span>
+      </div>
+      <div class="topbar-meta">
+        <span>2026.09.10–2026.09.14</span>
+        <span>Brussels / Antwerp / Ghent</span>
+      </div>
+    </header>
+
+    <section class="focus-card">
+      <div class="focus-copy">
+        <div class="focus-kicker">此刻关注</div>
+        <div class="focus-title">下一行程事件</div>
+        <div class="focus-event">
+          <span class="event-type">Flight / Rail</span>
+          <span class="event-change">2026.09.10 Thu 13:03–14:21 Europe/Amsterdam · Venlo → Breda</span>
+        </div>
+        <div class="focus-event">
+          <span class="event-type">Arrival</span>
+          <span class="event-change">2026.09.10 Thu 14:42–16:12 Europe/Brussels · Breda → Brussels Central Station</span>
+        </div>
+      </div>
+      <aside class="countdown-panel">
+        <div class="countdown-title">距离出发倒计时</div>
+        <div class="countdown-grid">
+          <div class="time-unit">
+            <span class="time-value" id="days">00</span>
+            <span class="time-label">天</span>
+          </div>
+          <div class="time-unit">
+            <span class="time-value" id="hours">00</span>
+            <span class="time-label">时</span>
+          </div>
+          <div class="time-unit">
+            <span class="time-value" id="mins">00</span>
+            <span class="time-label">分</span>
+          </div>
+          <div class="time-unit">
+            <span class="time-value" id="secs">00</span>
+            <span class="time-label">秒</span>
+          </div>
+        </div>
+        <div class="countdown-date">
+          <span id="countdown-zone">Europe/Brussels · Brussels</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-title">行程总览地图</div>
+      <div class="section-sub">手绘路线 · 按天标记</div>
+      <div class="map-wrap">
+        <svg viewBox="0 0 780 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--line-soft)" stroke-width="1" opacity="0.45" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="780" height="320" fill="url(#grid)" opacity="0.4" />
+
+          <!-- background rough map -->
+          <path d="M30 260 C110 170, 125 130, 180 180 C210 200, 220 240, 260 230 C290 220, 280 150, 310 120 C340 100, 380 125, 390 180 C405 235, 440 230, 470 190 C500 160, 530 100, 560 110 C600 130, 620 200, 650 170 C680 150, 710 150, 740 180" fill="none" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 3" opacity="0.7" />
+
+          <!-- route day 1 -->
+          <path class="route-one" d="M130 250 C170 232, 180 210, 210 205 C250 210, 250 175, 280 160 C310 155, 340 180, 330 210 C318 240, 300 260, 270 260" />
+          <circle cx="130" cy="250" r="5" fill="var(--orange)" />
+          <circle cx="270" cy="260" r="5" fill="var(--orange)" />
+          <text class="map-label" x="110" y="250">Venlo</text>
+          <text class="map-label" x="240" y="280">Breda</text>
+          <text class="pin-label" x="265" y="235">Belgium</text>
+
+          <!-- route day 1/2 -->
+          <path class="route-two" d="M270 260 C305 245, 320 235, 330 215 C340 190, 365 180, 410 180 C450 180, 465 170, 500 160 C530 150, 540 160, 560 150 C590 140, 610 145, 630 150 C650 160, 660 160, 690 150" />
+          <circle cx="270" cy="260" r="5" fill="var(--blue)" />
+          <circle cx="690" cy="150" r="5" fill="var(--blue)" />
+          <text class="map-label" x="300" y="245">Breda</text>
+          <text class="map-label" x="620" y="145">Brussels</text>
+
+          <!-- route day 2 -->
+          <path class="route-three" d="M520 80 C535 96, 550 112, 570 110 C585 110, 590 120, 605 125 C620 130, 630 145, 655 145" />
+          <circle cx="520" cy="80" r="5" fill="var(--green)" />
+          <circle cx="655" cy="145" r="5" fill="var(--green)" />
+          <text class="map-label" x="525" y="72">Brussels</text>
+
+          <!-- city labels -->
+          <text class="map-city" x="120" y="80">Venlo</text>
+          <text class="map-city" x="270" y="300">Breda</text>
+          <text class="map-city" x="610" y="130">Brussels</text>
+          <text class="map-city" x="540" y="75">Brussels</text>
+          <text class="map-label" x="540" y="205">Argus Hotel Brussels</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">已确认安排</div>
+      <div class="section-sub">时间、地址、电话已核对，证件与房间信息不写入公开页</div>
+      <div class="bookings-grid">
+        <div class="booking-card">
+          <div class="booking-kind">
+            <span>机票</span>
+            <span class="booking-icon">✈</span>
+          </div>
+          <div class="booking-name">Venlo → Breda</div>
+          <div class="booking-details">
+            <strong>2026.09.10</strong><br />
+            13:03–14:21<br />
+            Europe/Amsterdam<br />
+            <span class="booking-phone">KLM / flight confirmed</span>
+          </div>
+        </div>
+        <div class="booking-card">
+          <div class="booking-kind">
+            <span>租车</span>
+            <span class="booking-icon">↗</span>
+          </div>
+          <div class="booking-name">Train</div>
+          <div class="booking-details">
+            <strong>2026.09.10</strong><br />
+            14:42–16:12<br />
+            Breda → Brussels Central<br />
+            <span class="booking-phone">Breda Station 14:42 · Brussels 16:12</span>
+          </div>
+        </div>
+        <div class="booking-card">
+          <div class="booking-kind">
+            <span>酒店</span>
+            <span class="booking-icon">⌂</span>
+          </div>
+          <div class="booking-name">Argus Hotel Brussels</div>
+          <div class="booking-details">
+            <strong>三晚</strong><br />
+            2026.09.10–09.13<br />
+            <span class="booking-phone">Hotel address: Brussels</span>
+          </div>
+        </div>
+        <div class="booking-card">
+          <div class="booking-kind">
+            <span>门票</span>
+            <span class="booking-icon">♬</span>
+          </div>
+          <div class="booking-name">Maison Dandoy Louise</div>
+          <div class="booking-details">
+            <strong>2026.09.10</strong><br />
+            18:00<br />
+            <span class="booking-phone">Maison Dandoy Louise · Brussels</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">逐日行程</div>
+      <div class="section-sub">已按时区标注，多点导航入口在每日路线地图</div>
+      <div class="day-list">
+
+        <article class="day-card">
+          <div class="day-heading">
+            <div class="day-heading-left">
+              <div class="day-number">1</div>
+              <div>
+                <div class="day-date">2026.09.10 · Thu · CEST / Europe/Amsterdam</div>
+                <div class="day-title">Venlo → Breda → Brussels</div>
+              </div>
+            </div>
+            <button class="route-toggle" data-target="map1">展开当日路线地图</button>
+          </div>
+          <div class="route-map-day" id="map1">
+            <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 100 C90 100, 100 60, 150 99 C170 90, 170 100, 190 82 C205 100, 210 100, 230 96 C250 95, 250 95, 270 84 C285 85, 300 96, 340 90 C380 100, 390 80, 420 78 C450 78, 460 95, 490 105 C530 110, 560 95, 590 105 C630 120, 640 110, 680 102" fill="none" stroke="var(--orange)" stroke-width="3" stroke-dasharray="2 3" />
+              <circle cx="30" cy="100" r="5" fill="var(--orange)" />
+              <circle cx="270" cy="84" r="5" fill="var(--orange)" />
+              <circle cx="680" cy="102" r="5" fill="var(--orange)" />
+              <text class="map-label" x="20" y="82">Venlo</text>
+              <text class="map-label" x="260" y="72">Breda</text>
+              <text class="map-label" x="650" y="88">Brussels Central</text>
+              <text class="map-label" x="1" y="155">09/10 13:03–14:21 / 14:42–16:12</text>
+            </svg>
+          </div>
+          <div class="daily-entries">
+            <div class="day-entry">
+              <div class="entry-time">13:03–14:21<br />Europe/Amsterdam</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Venlo%20airport">Venlo → Breda</a></span><br />
+                航班/交通：Venlo 出发至 Breda 到达，航班时间以已确认航班为准。<br />
+                <span class="entry-note">确认航班</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">14:42–16:12<br />Europe/Amsterdam</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Breda%20Station%20to%20Brussels%20Central%20Station">Breda → Brussels Central Station</a></span><br />
+                前往布鲁塞尔中央火车站，后转酒店。<br />
+                <span class="entry-note">火车建议提前检票</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">19:00–20:00<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Maison%20Dandoy%20Louise%20Brussels">Maison Dandoy Louise</a></span><br />
+                华夫饼晚餐：酒店附近，计划当天晚饭和华夫饼。<br />
+                <span class="entry-tags">
+                  <span class="tag">店内品</span>
+                  <span class="tag">必须预留步行时间</span>
+                </span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">夜宿<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Argus%20Hotel%20Brussels">Argus Hotel Brussels</a></span><br />
+                第一晚酒店：Argus Hotel Brussels。<br />
+                <span class="entry-note">需核对房间号</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-heading">
+            <div class="day-heading-left">
+              <div class="day-number">2</div>
+              <div>
+                <div class="day-date">2026.09.11 · Fri · CEST / Europe/Brussels</div>
+                <div class="day-title">欧洲议会 · 圣休伯特拱廊街 · 皇家美术博物馆</div>
+              </div>
+            </div>
+            <button class="route-toggle" data-target="map2">展开当日路线地图</button>
+          </div>
+          <div class="route-map-day" id="map2">
+            <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 120 C120 95, 140 110, 180 110 C225 110, 225 120, 255 100 C280 120, 300 120, 330 118 C360 120, 370 110, 390 115 C420 125, 440 128, 475 120 C500 110, 520 113, 555 96 C590 90, 620 100, 660 95" fill="none" stroke="var(--blue)" stroke-width="3" stroke-dasharray="4 4" />
+              <circle cx="50" cy="120" r="5" fill="var(--blue)" />
+              <circle cx="255" cy="100" r="5" fill="var(--blue)" />
+              <circle cx="555" cy="96" r="5" fill="var(--blue)" />
+              <circle cx="660" cy="95" r="5" fill="var(--blue)" />
+              <text class="map-label" x="33" y="100">Hotel</text>
+              <text class="map-label" x="215" y="80">Parliament</text>
+              <text class="map-label" x="530" y="80">Royal Museum</text>
+              <text class="map-label" x="635" y="80">Troc &amp; Brol</text>
+            </svg>
+          </div>
+          <div class="daily-entries">
+            <div class="day-entry">
+              <div class="entry-time">10:00–11:00<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=European%20Parliament%20Brussels">European Parliament</a></span><br />
+                预约参观欧洲议会。<br />
+                <span class="entry-note">预约</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">11:30–12:30<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Parlamentarium%20Brussels">Parlamentarium</a></span><br />
+                预约参观 Parlamentarium。<br />
+                <span class="entry-note">预约</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">12:30–14:00<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place">午饭建议</span><br />
+                午饭暂时无安排，建议在 Saint Hubert Arcades 周边选择熟食或布鲁塞尔经典餐厅。<br />
+                <span class="tag">推荐：两条街区吃轻餐</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">14:00–15:30<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Saint%20Hubert%20Arcades%20Brussels">圣休伯特拱廊街</a></span><br />
+                沿圣休伯特拱廊街一路走，途经 <a href="https://www.google.com/maps/search/?api=1&query=Manneken%20Pis%20Brussels">尿尿小童</a>。<br />
+                <span class="tag">步行路线</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">15:30–17:00<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Royal%20Museum%20of%20Fine%20Arts%20Brussels">比利时皇家美术博物馆</a></span><br />
+                预留一个半小时参观。建议优先看馆藏路线，避免超时。<br />
+                <span class="entry-note">博物馆近闭馆</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">17:00–18:00<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place"><a href="https://www.google.com/maps/search/?api=1&query=Manda%20Vintage%20Brussels">Manda Vintage</a></span><br />
+                周边古着店逛逛，类似 Manda Vintage 风格的店铺。<br />
+                <span class="tag">古着街区</span>
+              </div>
+            </div>
+            <div class="day-entry">
+              <div class="entry-time">晚餐<br />Europe/Brussels</div>
+              <div class="entry-content">
+                <span class="place">晚饭可考虑</span><br />
+                晚餐未定，可在 Saint Hubert 周边或者回酒店前可安排餐厅。<br />
+                <span class="tag">如有时间：去 Troc &amp; Brol 挑礼物</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">待办清单</div>
+      <div class="section-sub">纯列表，不做可勾选</div>
+      <div class="checklist">
+        <div class="check-row"><span class="check-dot"></span><span>确认 Venlo → Breda 航班和 Breda → Brussels Central 列车对应的车厢及座位信息。</span></div>
+        <div class="check-row"><span class="check-dot"></span><span>核对 Argus Hotel Brussels 三晚入住与房型信息，避免晚到登记冲突。</span></div>
+        <div class="check-row"><span class="check-dot"></span><span>提前预约欧洲议会与 Parlamentarium，确认参观通道与团队人数限制。</span></div>
+        <div class="check-row"><span class="check-dot"></span><span>查阅皇家美术博物馆闭馆日，确认 15:30–17:00 的馆内开放情况。</span></div>
+        <div class="check-row"><span class="check-dot"></span><span>查看圣休伯特拱廊街附近美术馆与古着店的营业时间及可选餐饮。</span></div>
+        <div class="check-row"><span class="check-dot"></span><span>联系酒店安排同住人员与到店接送，免去第一晚路线压力。</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">实用贴士</div>
+      <div class="section-sub">本页为公开行程页，证件信息与房间号不写入</div>
+      <div class="tip-grid">
+        <div class="tip-card">
+          <strong>交通</strong>
+          火车和马路两种方式要相互补足；Brussels Central Station 与 Argus Hotel Brussels 约 15–20 分钟步行。以欧洲/Brussels 时区描记，需带时区提示。
+        </div>
+        <div class="tip-card">
+          <strong>时区</strong>
+          开始时和结束时都写成 Europe/Amsterdam 与 Europe/Brussels 的完整格式，以免“跨时区浏览错算时间”。飞行与火车时间以当地往返为准。
+        </div>
+        <div class="tip-card">
+          <strong>博物馆与预约</strong>
+          皇家美术博物馆需核对该天开放，欧洲议会与 Parlamentarium 均需提前预约；如果遇到博物馆闭馆，请改去另一条路线。
+        </div>
+        <div class="tip-card">
+          <strong>购买与礼物</strong>
+          如果晚间有时间，Troc &amp; Brol 可以作为最后一站挑礼物；建议提前在地图页查看是否在同一路线内，避免回头。
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Belgium Travel Handbook · 2026 / 09 / 10–14
+    </div>
+  </div>
+
+  <script>
+    const tripStart = Date.parse('2026-09-10T13:03:00+02:00');
+    const pad = (n) => String(n).padStart(2, '0');
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = Math.max(0, tripStart - now);
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+
+      document.getElementById('days').textContent = pad(days);
+      document.getElementById('hours').textContent = pad(hours);
+      document.getElementById('mins').textContent = pad(mins);
+      document.getElementById('secs').textContent = pad(secs);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const isNight = () => {
+      const hour = new Date().getHours();
+      return hour >= 18 || hour < 6;
+    };
+
+    if (isNight()) {
+      document.body.classList.add('night');
+    }
+
+    document.querySelectorAll('.route-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = document.getElementById(button.dataset.target);
+        const isOpen = target.classList.toggle('open');
+        button.textContent = isOpen ? '收起当日路线地图' : '展开当日路线地图';
+      });
+    });
+  </script>
+</body>
+</html>
